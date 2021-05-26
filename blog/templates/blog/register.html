@@ -1,0 +1,83 @@
+{% extends 'blog/main.html' %}
+{% load static %}
+{% block content %}
+<div class="login-form-container">
+    <form method="POST" action="{% url 'blog:register' %}">
+        {% csrf_token %}
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+        {% if messages %}
+        {% for message in messages %}
+           <div class="alert alert-danger" role="alert">
+               {{message}}
+            </div>
+        {% endfor %}
+        {% endif %}
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="text" name="first-name" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">First Name</label>
+                </div>
+            </div>
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input type="text" name="last-name" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Last Name</label>
+            </div>
+        </div>
+    </div>
+    <!-- username input -->
+    <div class="form-outline mb-4">
+        <div class="form-floating mb-3">
+            <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
+            <label for="floatingInput">Username</label>
+        </div>
+    </div>
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+        <div class="form-floating mb-3">
+            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email</label>
+        </div>
+    </div>
+
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+        <div class="form-floating mb-3">
+            <input type="password" name="password" class="form-control" id="floatingInput" placeholder="password">
+            <label for="floatingInput">Password</label>
+        </div>
+    </div>
+    <!-- Checkbox -->
+    <div class="form-check d-flex justify-content-center mb-4">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+            <label class="form-check-label" for="flexCheckDefault">Subscribe to our newsletter</label>
+        </div>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-outline-primary btn-block mb-4">Sign up</button>
+
+    <!-- Register buttons -->
+    <div class="text-center">
+        <p>or sign up with:</p>
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+            <i class="fab fa-facebook-f"></i>
+        </button>
+
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+            <i class="fab fa-google"></i>
+        </button>
+
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+            <i class="fab fa-twitter"></i>
+        </button>
+
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+            <i class="fab fa-github"></i>
+        </button>
+    </div>
+</form>
+</div>
+{% endblock%}

@@ -1,0 +1,55 @@
+{% extends 'blog/main.html'%}
+
+{% load static %}
+
+{% block content %}
+
+    <section class="main-container">
+        {% if post.image %}
+        <div class="hero-image" style=" background-image: url({{post.image.url}})">
+
+        </div>
+        {% else %}
+        <div class="hero-image" style=" background-image: url('')">
+
+        </div>
+        {% endif %}
+        <h1 class="blog-title">{{post.title}}</h1>
+        <div class="content">
+            <div class="aurthor-info">
+                <div class="profile-picture" style="background-image: url({{user.author.profile_pic.url}});">
+
+                </div>
+                <p>{{user.username}}</p>
+                <p>{{user.email}}</p>
+                <p>{{date}}</p>
+            </div>
+                <div class="content-text">
+                {{post.body|safe}}
+            </div>
+        </div>
+
+        <div class="comments container" style="width:50%">
+            <form action="{% url 'blog:comment' post.id %}" method="POST" >
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="comment" name="comment">
+                    <label for="floatingInput">Write Your Comments Here...</label>
+                </div>
+                <button type="submit" class="btn btn-outline-primary btn-sm">Post</button>
+            </form>
+            {% for comment in comments %}
+            <div class="card" style="margin-top:3vh">
+                <div class="card-header">
+                    {{comment.author}}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{comment.comment_text}}</p>
+                    <span style="margin-right:10px">{{comment.total_likes}}</span>
+                    <a href="{% url 'blog:hit_like' comment.id %}" style="color: #3f3f3f; font-size: 20px"><i class="far fa-thumbs-up"></i></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

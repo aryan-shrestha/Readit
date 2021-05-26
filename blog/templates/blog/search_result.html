@@ -1,0 +1,32 @@
+{% extends 'blog/main.html' %}
+{% load static %}
+{% block content %}
+    <section class="main-container">
+        <h3 style="text-align: center; font-size: 20px; margin-top: 2vh"> Search result of "{{search_keyword}}" </h3>
+        <div class="posts-container">
+            {% for post in search_result %}
+            <div class="card">
+                <h5 class="card-header">{{post.title}}</h5>
+                <div class="card-body">
+                  <h5 class="card-title">{{post.date_created}}</h5>
+                  <p class="card-text">{{post.body|safe|slice:":200"}}...</p>
+                  <a href="{% url 'blog:article' post.slang %}" class="btn btn-outline-primary">Read More</a>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+    </section>
+{% endblock %}

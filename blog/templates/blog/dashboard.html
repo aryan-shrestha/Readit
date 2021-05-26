@@ -1,0 +1,53 @@
+{% extends 'blog/main.html'%}
+{% load static %}
+{% block content %}
+    <div class="outer-profile-container">
+        <div class="inner-profile-container">
+            <div class="profile-detail-container">
+                <div class="profile-picture" style="background-image: url('{{user.author.profile_pic.url}}');">
+                </div>
+                <h2>{{user.username}}</h2>
+                <h3>{{user.email}}</h3>
+            </div>
+            <div class="total-post">
+                <h3>Total Posts</h3>
+                <p>{{total_posts}}</p>
+            </div>
+            <div class="total-feedbacks">
+                <h3>Total Feedbacks</h3>
+                <p>80</p>
+            </div>
+        </div>
+    </div>
+     <div class="form">
+        <form action="{% url 'blog:update_profile_pic' %}" method="POST" enctype='multipart/form-data'>
+            {% csrf_token %}
+            {{form}}<br>
+            <input type="submit" value="update">
+        </form>
+         <a href="{% url 'blog:create_post' %}"><button type="button" class="btn btn-outline-primary btn-lg">Create Post</button></a>
+    </div>
+    <div class="your-post">
+        <h1>Your Posts</h1>
+        {% for post in posts %}
+        <div class="post-card">
+            {% if post.image %}
+            <div class="post-thumbnail" style="background-image: url('{{post.image.url}}');">
+                
+            </div>
+            {% else %}
+            <div class="post-thumbnail" style="background-image: url('');">
+
+            </div>
+            {% endif %}
+            <div class="post-title">
+                <p>{{post.title}}</p>
+                <div class="buttons">
+                    <a href="{% url 'blog:update_post' post.slang %}" class="btn btn-outline-primary" style="margin: 10px;">Update</a>
+                    <a href="{% url 'blog:delete_post' post.slang %}" class="btn btn-outline-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
