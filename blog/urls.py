@@ -23,5 +23,6 @@ urlpatterns = [
     path('comment/<int:pk>', views.add_comment, name='comment'),
     path('update_profile_pic/', views.update_profile_pic, name='update_profile_pic'),
     path('hit_like/<int:pk>', views.hit_like, name='hit_like'),
+    path('hit_like/', views.like, name='hit_like'),
 
 ]

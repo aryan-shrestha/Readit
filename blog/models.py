@@ -45,7 +45,7 @@ class Comment(models.Model):
         return total_likes
 
 class Likes(models.Model):
-    author = models.OneToOneField(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     like = models.BooleanField(default=False)
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404, reverse, redirect
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
@@ -7,6 +7,7 @@ from django.contrib import messages
 
 from .decorators import *
 import datetime
+import json
 
 from .forms import *
 from .models import *
@@ -202,7 +203,7 @@ def hit_like(request, pk):
     if request.user.is_authenticated:
         comment = Comment.objects.get(id=pk)
         post_slug = Post.objects.filter(comment=pk)[0].slang
-        if Likes.objects.filter(author = request.user, comment=comment).exists():
+        if Likes.objects.filter(author=request.user, comment=comment).exists():
             Likes.objects.filter(author=request.user, comment=comment)[0].delete()
             return redirect(f'/article/{post_slug}')
         else:
@@ -222,3 +223,18 @@ def update_profile_pic(request):
             return redirect(reverse('blog:dashboard'))
 
     return redirect(reverse('blog:dashboard'))
+
+def like(request):
+    data = json.loads(request.body)
+    commentId = data['commentId']
+    comment = Comment.objects.get(id=commentId)
+    if Likes.objects.filter(author=request.user, comment=comment).exists():
+        Likes.objects.filter(author=request.user, comment=comment)[0].delete()
+        total_likes = comment.total_likes()
+        return JsonResponse(total_likes, safe=False)
+    else:
+        like = Likes.objects.create(author=request.user, comment=comment)
+        like.save()
+        total_likes = comment.total_likes()
+        return JsonResponse(total_likes, safe=False)
+
