@@ -19,6 +19,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
     path('logout/', views.logout_view, name='logout'),
+    path('email_verification_sent/', views.email_verification_sent, name='email_verification_sent'),
 
     path('comment/<int:pk>', views.add_comment, name='comment'),
     path('update_profile_pic/', views.update_profile_pic, name='update_profile_pic'),

@@ -13,12 +13,15 @@ class PostCreationForm(forms.ModelForm):
                    }
 
 class CustomUserCreationForm(forms.Form):
-    first_name = forms.CharField(label="First Name", min_length=4, max_length=50)
-    last_name = forms.CharField(label="Last Name", min_length=4, max_length=50)
-    username = forms.CharField(label="Username", min_length=4, max_length=150)
-    email = forms.EmailField(label="Enter Email")
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput)
+    first_name = forms.CharField(label="First Name", min_length=4, max_length=50,
+                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(label="Last Name", min_length=4, max_length=50,
+                                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(label="Username", min_length=4, max_length=150,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label="Enter Email", widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label="Password", widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     def clean_first_name(self):
         first_name = self.cleaned_data['first_name']

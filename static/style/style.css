@@ -9,6 +9,57 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+nav {
+  width: 100%;
+  height: 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav-container {
+  margin: auto;
+  width: 95%;
+  height: 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-sizing: 0px -10px 38px rgba(0, 0, 0, 0.25);
+          box-sizing: 0px -10px 38px rgba(0, 0, 0, 0.25);
+}
+
+.nav-container img {
+  width: 70px;
+  height: auto;
+}
+
+.nav-container a {
+  display: inline-block;
+  background-color: #6BDAED;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.nav-container i {
+  color: #B8B8B8;
+  font-size: 22px;
+  margin-right: 20px;
+}
+
 .latest-container {
   margin-top: 2vh;
   width: 100%;
@@ -241,16 +292,7 @@ footer {
 
 .aurthor-info {
   width: 20%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  margin-right: 10px;
 }
 
 .profile-picture {
@@ -267,9 +309,23 @@ footer {
   width: 80%;
 }
 
-.login-form-container{
-    width:30%;
-    margin:7vh auto;
+.comments-container {
+  width: 55%;
+  margin: auto;
+}
+
+.form {
+  width: 60%;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 @media screen and (max-width: 1024px) {
@@ -302,18 +358,6 @@ footer {
     width: 100%;
     font-size: 16px;
   }
-  .login-form-container{
-    width:70%;
-  }
-}
-
-.form{
-    width:100%%;
-    background-color:#f6f6f6;
-    display:flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-bottom: 2vh;
 }
 
 @media screen and (max-width: 690px) {
@@ -345,10 +389,6 @@ footer {
   .latest-inner-container p {
     width: 100%;
     font-size: 16px;
-  }
-
-   .login-form-container{
-    width:70%;
   }
 }
 
@@ -382,9 +422,14 @@ footer {
     width: 100%;
     font-size: 16px;
   }
-
-   .login-form-container{
-    width:90%;
+  .comments-container {
+    width: 85%;
+    margin: auto;
+  }
+  .content {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 }
 
@@ -404,6 +449,27 @@ footer {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+  }
+  .content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 95%;
+    margin-top: 3vh;
+    margin: 3vh auto;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .form {
+    width: 90%;
+  }
+  .form form {
+    width: 50%;
   }
 }
 
@@ -435,10 +501,6 @@ footer {
     border-top-left-radius: 0;
     text-align: center;
   }
-  .form{
-    width:100%;
-    flex-direction: column;
-    }
 }
 
 @media screen and (max-width: 490px) {
@@ -472,10 +534,6 @@ footer {
   }
   .footer-text td {
     border: none;
-  }
-
-   .login-form-container{
-    width:100%;
   }
 }
 
@@ -699,15 +757,10 @@ footer {
   .profile-detail-container h3 {
     font-size: 12px;
   }
-  .total-post, total-feedbacks{
-    text-align: center;
-  }
   .total-post p, .total-feedbacks p {
-    text-align: center;
     font-size: 30px;
   }
   .total-post h3, .total-feedbacks h3 {
-    text-align: center;
     font-size: 15px;
   }
   .your-post {
@@ -718,7 +771,6 @@ footer {
   }
   .post-card {
     width: 100%;
-    height:25vh;
   }
   .post-thumbnail {
     width: 40%;

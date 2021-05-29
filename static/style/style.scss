@@ -216,11 +216,10 @@ footer{
     justify-content: space-between;
 }
 
+
 .aurthor-info{
     width: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-right: 10px;
 }
 
 .profile-picture{
@@ -242,6 +241,13 @@ footer{
     margin: auto;
 }
 
+.form{
+    width: 60%;
+    margin: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
 
 @media screen and (max-width: 1024px){
     .latest-container{
@@ -336,6 +342,13 @@ footer{
             font-size: 16px;
         }
     }
+    .comments-container{
+        width: 85%;
+        margin: auto;
+    }
+    .content{
+        align-items: center
+    }
     
 }
 @media screen and (max-width: 670px){
@@ -348,6 +361,21 @@ footer{
         justify-content: center;
         align-items: center;
     } 
+    .content{
+        display: flex;
+        width: 95%;
+        margin-top: 3vh;
+        margin: 3vh auto;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+    .form{
+        width: 90%;
+        form{
+            width: 50%;
+        }
+    }
+    
 }
 @media screen and (max-width: 580px){
     .sub-nav-container{

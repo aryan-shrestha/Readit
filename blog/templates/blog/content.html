@@ -14,25 +14,28 @@
 
         </div>
         {% endif %}
-        <h1 class="blog-title">{{post.title}}</h1>
+        <h1 class="blog-title" style="text-align: center;">{{post.title}}</h1>
         <div class="content">
-            <div class="aurthor-info">
+            <div class="card aurthor-info" style="width: 18rem;">
                 {% if post.author.author.profile_pic %}
-                <div class="profile-picture" style="background-image: url({{post.author.author.profile_pic.url}});">
+                <img src="{{post.author.author.profile_pic.url}}" class="card-img-top" alt="...">
                 {% else %}
-                <div class="profile-picture" style="background-image: url('');"></div>
+                <img src="{% static '/images/placeholder.png' %}" class="card-img-top" alt="...">
                 {% endif %}
+                <div class="card-body">
+                    <p class="card-text" style="text-align: center;">
+                        {{post.author.username}}<br>
+                        {{post.author.email}}<br>
+                        {{post.author.date_created}}
+                    </p>
                 </div>
-                <p>{{post.author.username}}</p>
-                <p>{{post.author.email}}</p>
-                <p>{{post.date_created}}</p>
-            </div>
-                <div class="content-text">
+              </div>
+            <div class="content-text">
                 {{post.body|safe}}
             </div>
         </div>
 
-        <div class="comments container" style="width:50%">
+        <div class="comments-container">
             <form action="{% url 'blog:comment' post.id %}" method="POST" >
                 {% csrf_token %}
                 <div class="form-floating mb-3">

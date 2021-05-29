@@ -175,13 +175,15 @@ def register_view(request):
             user.groups.add(Group.objects.get(id=2))
             author = Author.objects.create(user=user)
             author.save()
-            messages.success(request,"User has ben created. Login with your credentials.")
-            return HttpResponseRedirect(reverse('blog:login'))
+            return HttpResponseRedirect(reverse('blog:email_verification_sent'))
 
     context = {
         'form': form
     }
     return render(request, 'blog/register.html', context)
+
+def email_verification_sent(request):
+    return render(request, 'blog/registration_email_sent.html')
 
 def logout_view(request):
     logout(request)
