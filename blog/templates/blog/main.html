@@ -43,7 +43,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+  <div class="collapse navbar-collapse " id="navbarTogglerDemo02" style="background-color: #f8f9fa; z-index:5">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
         <a class="nav-link" href="{% url 'blog:index'%}">Home</a>
@@ -52,7 +52,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Categories
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background-color: #fff; z-index: 3;">
             {% for category in categories %}
             <a class="dropdown-item" href="{% url 'blog:category' category.name %}">{{category.name}}</a>
             {% endfor %}

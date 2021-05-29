@@ -249,6 +249,12 @@ footer{
     justify-content: space-between;
 }
 
+.login-form-container{
+    width: 30%;
+    margin: 10vh auto;
+
+}
+
 @media screen and (max-width: 1024px){
     .latest-container{
         margin-top:2vh ;
@@ -349,6 +355,11 @@ footer{
     .content{
         align-items: center
     }
+    .login-form-container{
+        width: 80%;
+        margin: 5vh auto;
+    }
+    
     
 }
 @media screen and (max-width: 670px){

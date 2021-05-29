@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="login-form-container">
+    <h1 style="text-align: center; color: #3F3F3F;">Register</h1>
     <form method="POST" action="{% url 'blog:register' %}">
         {% csrf_token %}
         <!-- 2 column grid layout with text inputs for the first and last names -->
