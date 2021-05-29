@@ -17,12 +17,15 @@
         <h1 class="blog-title">{{post.title}}</h1>
         <div class="content">
             <div class="aurthor-info">
-                <div class="profile-picture" style="background-image: url({{user.author.profile_pic.url}});">
-
+                {% if post.author.author.profile_pic %}
+                <div class="profile-picture" style="background-image: url({{post.author.author.profile_pic.url}});">
+                {% else %}
+                <div class="profile-picture" style="background-image: url('');"></div>
+                {% endif %}
                 </div>
-                <p>{{user.username}}</p>
-                <p>{{user.email}}</p>
-                <p>{{date}}</p>
+                <p>{{post.author.username}}</p>
+                <p>{{post.author.email}}</p>
+                <p>{{post.date_created}}</p>
             </div>
                 <div class="content-text">
                 {{post.body|safe}}
@@ -45,9 +48,8 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text">{{comment.comment_text}}</p>
-                    <span style="margin-right:10px"><p class="likes">{{comment.total_likes}}</p></span>
-                    <a href="{% url 'blog:hit_like' comment.id %}" style="color: #3f3f3f; font-size: 20px"><i class="far fa-thumbs-up"></i></a>
-                    <button href="" data-commentid={{comment.id}}  style="color: #3f3f3f; font-size: 20px" class="likeBtn"><i class="far fa-thumbs-up"></i></button>
+                    <span>{{comment.total_likes}}</span>
+                    <a data-commentid={{comment.id}}  style="color: #3f3f3f; font-size: 20px; cursor: pointer;" class="likeBtn"><i class="far fa-thumbs-up"></i></a>
 
                 </div>
             </div>

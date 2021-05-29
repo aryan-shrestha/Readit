@@ -1,13 +1,5 @@
 var likeBtns=document.querySelectorAll('.likeBtn')
-var likes = document.querySelectorAll('.likes')
-
-// for(var i=0; i<likeBtns.length; i++){
-//     likeBtns[i].onclick = function(){
-//         console.log(this.dataset.commentid)
-//         likes[i].innerHTML = 'like'
-        
-//     }
-// }
+// var likes = document.querySelectorAll('.likes')
 
 for(var i = 0; i < likeBtns.length; i++){
     likeBtns[i].addEventListener('click', function(){
@@ -17,14 +9,13 @@ for(var i = 0; i < likeBtns.length; i++){
             window.location.href = '/login'
         }
         else{
-           hitLike(commentId, like)
+            hitLike(commentId)
         }
     })
 }
 
-function hitLike(commentId, like){
+function hitLike(commentId){
     var url = '/hit_like/'
-
     fetch(url, {
         method: 'POST',
         headers: {
@@ -37,8 +28,9 @@ function hitLike(commentId, like){
         return response.json()
     })
     .then((data) => {
-        console.log(data)
-        like.innerHTML = data
-        console.log(like)
+        // likes = document.querySelector("[data-likeid=" + CSS.escape(likeId) + "]");
+        parent = document.querySelector("[data-commentid=" + CSS.escape(commentId) + "]").parentElement
+        likes = parent.children[1]
+        likes.innerText = data
     })
 }
