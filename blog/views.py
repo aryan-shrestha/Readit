@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404, reverse, redirect
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+
+from verify_email.email_handler import send_verification_email
 
 from .decorators import *
 import datetime
@@ -154,31 +157,31 @@ def login_view(request):
 
 @unauthenticated_user
 def register_view(request):
+    form = CustomUserCreationForm()
     if request.method == 'POST':
-        print(request.POST)
-        username = request.POST['username']
-        email = request.POST['email']
-        if User.objects.filter(username=username).exists():
-            messages.error(request,"Username already taken!!")
-        elif User.objects.filter(email=email).exists():
-            messages.error(request,"Email already taken!!")
-        else:
-            first_name = request.POST['first-name']
-            last_name = request.POST['last-name']
-            email = request.POST['email']
-            password = request.POST['password']
-            new_user = User.objects.create_user(username, email, password)
-            new_user.first_name = first_name
-            new_user.last_name = last_name
-            group = Group.objects.get(name='author')
-            new_user.groups.add(group)
-            new_user.save()
-            author = Author.objects.create(user=new_user)
+        # username = request.POST['username']
+        # email = request.POST['email']
+        # if User.objects.filter(username=username).exists():
+        #     messages.error(request,"Username already taken!!")
+        # elif User.objects.filter(email=email).exists():
+        #     messages.error(request,"Email already taken!!")
+        # else:
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = send_verification_email(request, form)
+            user.first_name = form.clean_first_name()
+            user.last_name = form.clean_last_name()
+            user.save()
+            user.groups.add(Group.objects.get(id=2))
+            author = Author.objects.create(user=user)
             author.save()
             messages.success(request,"User has ben created. Login with your credentials.")
             return HttpResponseRedirect(reverse('blog:login'))
 
-    return render(request, 'blog/register.html')
+    context = {
+        'form': form
+    }
+    return render(request, 'blog/register.html', context)
 
 def logout_view(request):
     logout(request)

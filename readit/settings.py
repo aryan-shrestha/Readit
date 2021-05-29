@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'ckeditor',
     'crispy_forms',
+    'verify_email.apps.VerifyEmailConfig'
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'readitbyaryan@gmail.com'
 EMAIL_HOST_PASSWORD = 'Dhulabari@183'
+
+VERIFICATION_SUCCESS_TEMPLATE = None
+LOGIN_URL = '/login/'

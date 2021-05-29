@@ -24,6 +24,9 @@ urlpatterns = [
     path('', include('blog.urls')),
 
     #password reset urls
+    path(r'password_change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
+    path(r'password_change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
+
     path(r'password_reset/', auth_views.PasswordResetView.as_view(template_name='blog/password_reset.html'),
          name='password_reset'),
     path(r'password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='blog/password_reset_done.html'),
@@ -32,6 +35,9 @@ urlpatterns = [
         template_name='blog/password_reset_confirm.html'), name='password_reset_confirm'),
     path(r'password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete'),
          name='password_reset_complete'),
+
+    # Email verification urls
+    path('verification/', include('verify_email.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
