@@ -32,7 +32,7 @@ def article(request, slang):
     post = get_object_or_404(Post, slang=slang)
     post_id=post.id
     date_created = post.date_created
-    comments = Comment.objects.filter(post=post_id)[0:5]
+    comments = Comment.objects.filter(post=post_id)
 
     context = {
         'date_created': date_created,
@@ -159,13 +159,6 @@ def login_view(request):
 def register_view(request):
     form = CustomUserCreationForm()
     if request.method == 'POST':
-        # username = request.POST['username']
-        # email = request.POST['email']
-        # if User.objects.filter(username=username).exists():
-        #     messages.error(request,"Username already taken!!")
-        # elif User.objects.filter(email=email).exists():
-        #     messages.error(request,"Email already taken!!")
-        # else:
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = send_verification_email(request, form)
